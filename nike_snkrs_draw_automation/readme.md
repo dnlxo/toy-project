@@ -198,10 +198,10 @@ driver.implicitly_wait(10)
 - 응모 진행 중인 상품이 여러개 일 수 있다.
 
 - ```python
-  now_drawing = driver.find_elements_by_xpath("//*[contains(text(),'Coming Soon')]")
+  now_drawing = driver.find_elements_by_xpath("//*[contains(text(),'THE DRAW 응모하기')]")
   ```
 
-- '응모' 이라는 텍스트를 가진 요소들을 찾은 뒤 리스트로 반환해준다.
+- 'THE DRAW 응모하기' 이라는 텍스트를 가진 요소들을 찾은 뒤 리스트로 반환해준다.
 
 - 따라서 아래처럼 코드를 짜면 모든 요소들을 클릭할 수 있다.
 
@@ -212,4 +212,3 @@ driver.implicitly_wait(10)
 
 ---
 
-### 
