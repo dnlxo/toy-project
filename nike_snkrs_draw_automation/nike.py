@@ -53,21 +53,34 @@ def open_and_login(user_id, user_pw) :
 # 상품 클릭 후 응모
 def click_and_draw() :
     sleep(3)
-    now_drawing = driver.find_elements_by_xpath("//*[contains(text(),'Coming Soon')]")
+    now_drawing = driver.find_elements_by_xpath("//*[contains(text(),'THE DRAW 응모하기')]")
     for product in now_drawing :
         product.click()
         driver.implicitly_wait(10)
-        # 사이즈 클릭
-        # 응모 클릭
+        sleep(3)
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="checkTerms"]/label/i'))).click()
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="optionPrivacy"]/label/i'))).click()
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div/div[1]/div[2]/div[1]/section/div[2]/aside/div[2]/div[2]/div/div/div/form/div/div[2]/a/span'))).click()
+        sleep(0.1)
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div/div[1]/div[2]/div[1]/section/div[2]/aside/div[2]/div[2]/div/div/div/form/div/div[2]/ul/li[9]/a/span'))).click()
+        sleep(1)
+        driver.find_element_by_xpath('//*[@id="btn-buy"]').click()
         driver.get('https://www.nike.com/kr/launch/')
         driver.implicitly_wait(10)
+    
+    WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="jq_m_right_click"]/div/ul/li[1]/div/div/label'))).click()
+    sleep(1)
+    WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="jq_m_right_click"]/div/ul/li[1]/div/div/ul/li[4]/a'))).click()
+    sleep(1)
 
 
 # 아이디 별로 응모
 for i in range(len(id_list)) :
     open_and_login(id_list[i], pw_list[i])
     click_and_draw()
-    try :
-        shutil.rmtree("/Users/wetaeyoung/Desktop/abc/ccfiles")  # 쿠키 / 캐쉬파일 삭제
-    except :
-        pass
